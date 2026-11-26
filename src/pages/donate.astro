@@ -1,0 +1,36 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHero from "../components/PageHero.astro";
+import { site } from "../data/site";
+
+const title = "Donate | TAYP Foundation";
+const description =
+  "Online giving for TAYP Foundation is coming soon. 501(c)(3) status is pending, so gifts are not tax-deductible yet.";
+---
+
+<Base title={title} description={description}>
+  <PageHero
+    kicker="Donate"
+    title="Online giving is coming soon."
+    lede="When a gift can be made on this site, we will tell you exactly where it goes. That door is not open yet."
+  />
+
+  <section class="section" aria-labelledby="giving-heading">
+    <div class="wrap prose">
+      <h2 id="giving-heading">Where things stand</h2>
+      <p>
+        We are {site.name}, a Georgia nonprofit incorporated on {site.foundingLabel}. Our 501(c)(3) status is pending. A gift to us is not tax-deductible while that status is pending. We will update this page when the status changes, and we will not describe a gift as tax-deductible before then.
+      </p>
+      <p>
+        There is no payment form on this page, and we are not asking you to send money another way in the meantime. If you want to stand with the work now, sponsor an event or volunteer. Both of those conversations are open.
+      </p>
+      <div class="cta-row">
+        <a class="btn" href="/sponsors/#become-a-sponsor">Become a sponsor</a>
+        <a class="btn btn-ghost" href="/contact/?topic=volunteer">Volunteer</a>
+      </div>
+      <p class="note">
+        Questions about giving belong at <a href={`mailto:${site.email}`}>{site.email}</a>.
+      </p>
+    </div>
+  </section>
+</Base>

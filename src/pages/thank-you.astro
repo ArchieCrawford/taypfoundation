@@ -1,0 +1,20 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHero from "../components/PageHero.astro";
+
+const title = "Thank you | TAYP Foundation";
+const description = "We received your note to TAYP Foundation and will write back.";
+---
+
+<Base title={title} description={description} noindex={true}>
+  <PageHero
+    kicker="Received"
+    title="We got it."
+    lede="Someone from TAYP Foundation will write back at the email you shared. If your note is about the Classic, we will keep it with that conversation."
+  />
+  <section class="section">
+    <div class="wrap">
+      <a class="btn" href="/">Back to the home page</a>
+    </div>
+  </section>
+</Base>

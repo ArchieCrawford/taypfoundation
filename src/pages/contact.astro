@@ -1,0 +1,86 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHero from "../components/PageHero.astro";
+import Honeypot from "../components/Honeypot.astro";
+import External from "../components/External.astro";
+import { site } from "../data/site";
+
+const title = "Contact | TAYP Foundation";
+const description =
+  "Reach TAYP Foundation at support@taypfoundation.org or send a note. We read every message.";
+---
+
+<Base title={title} description={description}>
+  <PageHero
+    kicker="Contact"
+    title="Talk with us."
+    lede="Volunteers, sponsors, families, and student journalists are all welcome. Tell us what you need and we will write back."
+  />
+
+  <section class="section">
+    <div class="wrap split">
+      <form
+        class="form"
+        name="contact"
+        method="POST"
+        action="/thank-you/"
+        data-netlify="true"
+        netlify-honeypot="bot-field"
+      >
+        <input type="hidden" name="form-name" value="contact" />
+        <input type="hidden" name="subject" value="TAYP Foundation contact" />
+        <Honeypot />
+        <p class="note">Fields marked required must be filled in. We use this only to reply.</p>
+        <div class="fields two">
+          <label class="field">
+            Name <span class="req">(required)</span>
+            <input id="name" name="name" type="text" autocomplete="name" required />
+          </label>
+          <label class="field">
+            Email <span class="req">(required)</span>
+            <input id="email" name="email" type="email" autocomplete="email" inputmode="email" required />
+          </label>
+          <label class="field">
+            Phone <span class="req">(optional)</span>
+            <input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" />
+          </label>
+          <label class="field">
+            How can we help <span class="req">(required)</span>
+            <select id="topic" name="topic" required>
+              <option value="" selected disabled>Choose one</option>
+              <option value="volunteer">I want to volunteer</option>
+              <option value="sponsorship">Sponsorship</option>
+              <option value="programs">Programs</option>
+              <option value="classic">Media Showcase Classic</option>
+              <option value="other">Something else</option>
+            </select>
+          </label>
+          <label class="field full">
+            Message <span class="req">(required)</span>
+            <textarea id="message" name="message" required></textarea>
+          </label>
+        </div>
+        <button class="btn" type="submit">Send message</button>
+      </form>
+
+      <aside class="contact-aside panel" aria-label="Other ways to reach us">
+        <p class="kicker">Also here</p>
+        <h2>We work across Georgia.</h2>
+        <p class="note">Email and this form are the way to reach the Foundation.</p>
+        <p><a href={`mailto:${site.email}`}>{site.email}</a></p>
+        <p><External href={site.instagram}>Instagram {site.instagramHandle}</External></p>
+        <p><External href={site.tayp}>Visit mytayp.com</External></p>
+      </aside>
+    </div>
+  </section>
+</Base>
+
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const topic = params.get("topic");
+  const select = document.querySelector("#topic");
+  if (topic && select instanceof HTMLSelectElement) {
+    const match = [...select.options].some((option) => option.value === topic);
+    if (match) select.value = topic;
+  }
+</script>

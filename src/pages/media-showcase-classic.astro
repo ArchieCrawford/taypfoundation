@@ -1,0 +1,96 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHero from "../components/PageHero.astro";
+import External from "../components/External.astro";
+import { classic, classicEventJsonLd, classicPartners } from "../data/site";
+
+const title = "Media Showcase Classic 7v7 | TAYP Foundation";
+const description =
+  "Media Showcase Classic 7v7 is Saturday, May 22, 2027 at Bell Memorial Park in Milton, Georgia. Chick-fil-A Milton is the official event sponsor.";
+---
+
+<Base title={title} description={description} jsonLd={classicEventJsonLd()}>
+  <PageHero
+    kicker="Showcase"
+    title="Media Showcase Classic 7v7"
+    lede="A day for Georgia high school athletes to play, and for student media to learn the craft in public."
+  />
+
+  <section class="section">
+    <div class="wrap split">
+      <div class="panel event-panel">
+        <div class="date-lockup">
+          <p class="date-weekday">{classic.weekday}</p>
+          <p class="date-month">{classic.month}</p>
+          <p class="date-day">{classic.day}</p>
+          <p class="date-year">{classic.year}</p>
+        </div>
+        <div>
+          <p class="kicker">Save the date</p>
+          <h2>One field. Two crafts.</h2>
+          <p class="note">
+            We are bringing the game and the coverage together. Players get a 7-on-7 stage. Student reporters, photographers, and hosts get a real assignment, with mentors close by.
+          </p>
+        </div>
+      </div>
+      <dl class="facts">
+        <div>
+          <dt>When</dt>
+          <dd><time datetime={classic.date}>{classic.dateLabel}</time></dd>
+        </div>
+        <div>
+          <dt>Where</dt>
+          <dd>{classic.place}, {classic.city}</dd>
+        </div>
+        <div>
+          <dt>Official event sponsor</dt>
+          <dd>{classic.sponsor}</dd>
+        </div>
+        <div>
+          <dt>Team registration</dt>
+          <dd>
+            Through Zorts.
+            <span class="badge">Registration details coming soon</span>
+          </dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="lineup-heading">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="kicker">The lineup</p>
+        <h2 id="lineup-heading">Who is with this classic</h2>
+      </div>
+      <ul class="partner-row">
+        {
+          classicPartners.map((partner) => (
+            <li>
+              <span class="role">{partner.role}</span>
+              <span class="partner-name">{partner.name}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="charity-heading">
+    <div class="wrap">
+      <div class="panel charity">
+        <p class="kicker">Community</p>
+        <h2 id="charity-heading">A percentage goes back to neighbors</h2>
+        <p class="note">
+          A percentage of sponsorships from the Media Showcase Classic goes to
+          <External href={classic.charityUrl}>{classic.charity}</External>.
+          We will share the portion in plain language as sponsor packages are finished. The gift is part of the event, not an afterthought.
+        </p>
+        <div class="cta-row">
+          <a class="btn" href="/sponsors/#become-a-sponsor">Sponsor the Classic</a>
+          <a class="btn btn-ghost" href="/contact/?topic=classic">Ask a question</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
