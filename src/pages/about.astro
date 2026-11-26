@@ -1,0 +1,67 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHero from "../components/PageHero.astro";
+import CloseBand from "../components/CloseBand.astro";
+import { board, site } from "../data/site";
+
+const title = "About | TAYP Foundation";
+const description =
+  "TAYP Foundation Inc. is a Georgia nonprofit incorporated November 12, 2026. We give back to youth through sports, media education, and community.";
+---
+
+<Base title={title} description={description}>
+  <PageHero
+    kicker="About"
+    title="The work behind the coverage."
+    lede="TAYP covers Georgia high school sports. The Foundation is how we give that work back to young people."
+  />
+
+  <section class="section" aria-labelledby="mission-heading">
+    <div class="wrap stack">
+      <h2 id="mission-heading" class="kicker">Mission</h2>
+      <div class="panel pull">
+        <p>Our mission is to support Georgia’s young people through sports, media education, and community.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="story-heading">
+    <div class="wrap prose">
+      <h2 id="story-heading">Our story</h2>
+      <p>
+        If you have watched Georgia high school sports through TAYP, you have seen the work this foundation grows out of. We are in the gyms and on the sidelines, telling the stories of the athletes who make a Friday night matter.
+      </p>
+      <p>
+        TAYP Foundation Inc. was incorporated in Georgia on {site.foundingLabel} so that coverage could become something families can use. We give back to youth through sports, media education, and community. That looks like credentials and craft for student journalists, camps and clinics, gear when a season starts short, and scholarships as we are able to fund them.
+      </p>
+      <p>
+        We are new, and we would rather tell you that plainly. Our 501(c)(3) status is pending. Programs will open when they are actually ready. Until then, this site is the front porch: who we are, what we are building, and how to reach us.
+      </p>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="board-heading">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="kicker">The board</p>
+        <h2 id="board-heading">Seats, while we introduce the people</h2>
+        <p class="lede">
+          The roles below are real. The names are placeholders until we are ready to introduce the people who hold them. More seats may be added as the board is seated.
+        </p>
+      </div>
+      <div class="board">
+        {
+          board.map((seat) => (
+            <article class="card">
+              <h3>{seat.role}</h3>
+              <p class="person-name">{seat.name}</p>
+              <p class="note">Placeholder until this member is announced.</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <CloseBand />
+</Base>

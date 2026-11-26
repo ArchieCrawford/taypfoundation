@@ -1,0 +1,73 @@
+---
+import { nav } from "../data/site";
+
+const here = Astro.url.pathname.replace(/\/$/, "") || "/";
+const isHere = (href: string) => (href.replace(/\/$/, "") || "/") === here;
+---
+
+<header class="site-header">
+  <div class="sheen" aria-hidden="true"></div>
+  <div class="wrap header-bar">
+    <a class="brand" href="/">
+      <img src="/brand/mark.png" width="160" height="160" alt="" />
+      <span class="brand-text">TAYP <span>Foundation</span></span>
+      <span class="sr-only">, home</span>
+    </a>
+    <button
+      class="nav-toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="site-nav"
+      data-nav-toggle
+    >
+      <span class="sr-only">Menu</span>
+      <span class="burger" aria-hidden="true"><span></span></span>
+    </button>
+    <nav id="site-nav" class="nav-panel" data-nav aria-label="Primary">
+      {
+        nav.map((item) => (
+          <a class="nav-link" href={item.href} aria-current={isHere(item.href) ? "page" : undefined}>
+            {item.label}
+          </a>
+        ))
+      }
+      <a class="btn btn-small" href="/donate/" aria-current={isHere("/donate/") ? "page" : undefined}>Donate</a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const button = document.querySelector("[data-nav-toggle]");
+  const nav = document.querySelector("[data-nav]");
+
+  if (button instanceof HTMLButtonElement && nav instanceof HTMLElement) {
+    const label = button.querySelector(".sr-only");
+
+    const setOpen = (open: boolean) => {
+      nav.classList.toggle("is-open", open);
+      button.setAttribute("aria-expanded", String(open));
+      document.body.classList.toggle("nav-open", open);
+      if (label) label.textContent = open ? "Close menu" : "Menu";
+    };
+
+    button.addEventListener("click", () => {
+      const open = button.getAttribute("aria-expanded") !== "true";
+      setOpen(open);
+      if (open) {
+        const first = nav.querySelector("a");
+        if (first instanceof HTMLElement) first.focus();
+      }
+    });
+
+    nav.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => setOpen(false));
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && button.getAttribute("aria-expanded") === "true") {
+        setOpen(false);
+        button.focus();
+      }
+    });
+  }
+</script>

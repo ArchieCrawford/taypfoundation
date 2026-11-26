@@ -1,0 +1,109 @@
+---
+import Base from "../layouts/Base.astro";
+import CtaLinks from "../components/CtaLinks.astro";
+import CloseBand from "../components/CloseBand.astro";
+import { classic, classicPartners, programs, site } from "../data/site";
+
+const title = "TAYP Foundation | Youth, Sports, Education, Community";
+const description =
+  "TAYP Foundation supports Georgia youth through sports, media education, and community. We grew out of TAYP’s high school sports coverage.";
+---
+
+<Base title={title} description={description} preloadImage="/brand/logo.webp">
+  <section class="hero">
+    <div class="wrap">
+      <img
+        class="hero-logo"
+        src="/brand/logo.webp"
+        width="880"
+        height="686"
+        alt="TAYP Foundation"
+        fetchpriority="high"
+      />
+      <p class="tagline">
+        Youth <span aria-hidden="true">•</span> Sports <span aria-hidden="true">•</span> Education <span aria-hidden="true">•</span> Community
+      </p>
+      <p class="kicker">Our mission</p>
+      <h1>We show up for Georgia’s young people.</h1>
+      <p class="lede">
+        TAYP covers high school sports across the state. The Foundation gives that work back through sports, media education, and community.
+      </p>
+      <CtaLinks />
+      <p class="founded">Incorporated in Georgia on {site.foundingLabel}.</p>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="programs-heading">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="kicker">Programs</p>
+        <h2 id="programs-heading">What we are building</h2>
+        <p class="lede">
+          Four ways we plan to put the mission on the ground. Some of this is still taking shape, and we would rather say so.
+        </p>
+      </div>
+      <div class="cards programs">
+        {
+          programs.map((program) => (
+            <a class="card card-link" href={`/programs/#${program.id}`}>
+              <span class="badge">Coming soon</span>
+              <h3>{program.title}</h3>
+              <p>{program.summary}</p>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="event-heading">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="kicker">Up next</p>
+        <h2 id="event-heading">The first date on our calendar</h2>
+      </div>
+      <a class="panel event-panel" href={classic.path}>
+        <div class="date-lockup">
+          <p class="date-weekday">{classic.weekday}</p>
+          <p class="date-month">{classic.month}</p>
+          <p class="date-day">{classic.day}</p>
+          <p class="date-year">{classic.year}</p>
+        </div>
+        <div class="event-copy">
+          <h3>{classic.name}</h3>
+          <p>{classic.summary}</p>
+          <p class="meta-line">
+            <time datetime={classic.date}>{classic.dateLabel}</time>
+            <br />
+            {classic.place}, {classic.city}
+          </p>
+          <p class="meta-line">Official event sponsor: {classic.sponsor}</p>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="partners-heading">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="kicker">With the Classic</p>
+        <h2 id="partners-heading">People already on the sideline</h2>
+        <p class="lede">
+          These partners are with the Media Showcase Classic. A percentage of that event’s sponsorships goes to {classic.charity}.
+        </p>
+      </div>
+      <ul class="partner-row">
+        {
+          classicPartners.map((partner) => (
+            <li>
+              <span class="role">{partner.role}</span>
+              <span class="partner-name">{partner.name}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <CloseBand />
+</Base>

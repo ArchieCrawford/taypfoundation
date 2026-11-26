@@ -1,0 +1,116 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHero from "../components/PageHero.astro";
+import Honeypot from "../components/Honeypot.astro";
+import { classic, partnerPlaceholders, tiers } from "../data/site";
+
+const title = "Sponsors | TAYP Foundation";
+const description =
+  "Sponsor TAYP Foundation and the Media Showcase Classic. A percentage of Classic sponsorships supports North Fulton Community Charities.";
+---
+
+<Base title={title} description={description}>
+  <PageHero
+    kicker="Sponsors"
+    title="Put your name next to the kids."
+    lede="Sponsorship keeps camps, credentials, and community gifts within reach. We are still writing the packages, and the names below are placeholders until we are."
+  />
+
+  <section class="section" aria-labelledby="tiers-heading">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="kicker">Levels</p>
+        <h2 id="tiers-heading">Sponsor tiers</h2>
+        <p class="lede">
+          These tier names are placeholders. We will publish what each level includes, and what it costs, before we ask an organization to commit.
+        </p>
+      </div>
+      <div class="tiers">
+        {
+          tiers.map((tier) => (
+            <article class="card">
+              <p class="badge">Placeholder</p>
+              <h3>{tier.name}</h3>
+              <p class="note">{tier.detail}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="names-heading">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="kicker">Partners</p>
+        <h2 id="names-heading">Names will live here</h2>
+        <p class="lede">
+          Foundation partners will replace these lines. The Media Showcase Classic already has its own partners, including {classic.sponsor} as official event sponsor.
+        </p>
+      </div>
+      <div class="slots">
+        {partnerPlaceholders.map((label) => <p class="card placeholder-slot">{label}</p>)}
+      </div>
+      <p class="more">
+        <a href={classic.path}>See the Classic partners</a>
+      </p>
+    </div>
+  </section>
+
+  <section class="section" id="become-a-sponsor" aria-labelledby="sponsor-form-heading">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="kicker">Inquire</p>
+        <h2 id="sponsor-form-heading">Become a sponsor</h2>
+        <p class="lede">
+          Tell us who you are and what you hope to stand behind. This note starts a conversation. It is not a payment.
+        </p>
+      </div>
+      <form
+        class="form"
+        name="sponsor"
+        method="POST"
+        action="/thank-you/"
+        data-netlify="true"
+        netlify-honeypot="bot-field"
+      >
+        <input type="hidden" name="form-name" value="sponsor" />
+        <input type="hidden" name="subject" value="TAYP Foundation sponsorship inquiry" />
+        <Honeypot />
+        <p class="note">Fields marked required must be filled in. We use this only to reply.</p>
+        <div class="fields two">
+          <label class="field">
+            Organization <span class="req">(required)</span>
+            <input name="organization" type="text" autocomplete="organization" required />
+          </label>
+          <label class="field">
+            Your name <span class="req">(required)</span>
+            <input name="name" type="text" autocomplete="name" required />
+          </label>
+          <label class="field">
+            Email <span class="req">(required)</span>
+            <input name="email" type="email" autocomplete="email" inputmode="email" required />
+          </label>
+          <label class="field">
+            Phone <span class="req">(optional)</span>
+            <input name="phone" type="tel" autocomplete="tel" inputmode="tel" />
+          </label>
+          <label class="field full">
+            What interests you
+            <select name="interest">
+              <option value="Media Showcase Classic 7v7">Media Showcase Classic 7v7</option>
+              <option value="A season with the Foundation">A season with the Foundation</option>
+              <option value="Gear drive">Gear drive</option>
+              <option value="Not sure yet">Not sure yet</option>
+            </select>
+          </label>
+          <label class="field full">
+            Message <span class="req">(required)</span>
+            <textarea name="message" required></textarea>
+          </label>
+        </div>
+        <button class="btn" type="submit">Send sponsorship inquiry</button>
+      </form>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,27 @@
+---
+import { nav, site } from "../data/site";
+import External from "./External.astro";
+---
+
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div>
+      <p class="footer-name">TAYP Foundation</p>
+      <p class="footer-tag">Youth • Sports • Education • Community</p>
+    </div>
+    <nav class="footer-links" aria-label="Footer">
+      <a href="/">Home</a>
+      {nav.map((item) => <a href={item.href}>{item.label}</a>)}
+      <a href="/donate/">Donate</a>
+    </nav>
+    <div class="footer-links">
+      <a href={`mailto:${site.email}`}>{site.email}</a>
+      <External href={site.instagram}>Instagram</External>
+      <External href={site.tayp}>mytayp.com</External>
+    </div>
+  </div>
+  <div class="wrap legal">
+    <p>© {new Date().getFullYear()} TAYP Foundation Inc.</p>
+    <p class="status">Georgia nonprofit · Incorporated {site.foundingLabel} · 501(c)(3) status pending</p>
+  </div>
+</footer>
